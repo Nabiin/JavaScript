@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //Making Ajax call with fetch and Promices
+    console.log("hello world")
+    fetch('https://reqres.in/api/users?page=2')
+    .then(solve=>{
+     //   console.log("rikiya "  , solve)
+        return solve.json();
+    })
+    .then(data=>{
+        //console.log(data);
+       var abc = data.data[1];
+       console.log(abc)
+       //console.log(data.title)
+       console.log(`${abc.email}`)
+    })
+    .catch(error=>{
+        console.log("*****************************             error                      ******** " , error);
+    })
+
+</script>
+</html>

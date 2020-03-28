@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+
+
+       function fun() {
+        try {                //all he promices is code inside the try block as well as returned statement can be written in try block
+          var data = await fetch("https://reqres.in/api/users?page=2");  //we store the responce comming from the fetch url is stored in data variable
+          console.log(data);
+          var maindata = await data.json();  //the response data is now converted to json and stored in maindata variable
+          console.log(maindata);
+          //After converting data to maindata with .json() function both are still objects
+          var arrdata = maindata.data;
+          console.log('This is the main arrr ---------->' , arrdata);
+          console.log('This is the datda of arr[0]  -----> ' ,arrdata[0])
+          console.log(`Hello my name is ${arrdata[0]['first_name']} and my email id is ${arrdata[0].email} `)
+          return arrdata[1];     //As here return code is also in the inside function
+        } catch (error) {           //this catch block is used to handle the error 
+          console.log("Error is --> ", error);
+        }
+      }
+
+     /*
+     var returnVal =  fun();
+     console.log('*********' , returnVal)
+
+     AS Above we have store the value return from async function and console them 
+     but it is not possible and it show Promis{pending} s0 we have to use .then method to store and console the returing value
+     */
+    var returnVal;
+     fun().then(val=>{
+          returnVal = val;
+          console.log("The return value is store and display here && This is the datda of arr[1]  -----> ------------->    " , val);
+     })
+ /*As Es6 Promises we have used catch method to catch the error but in es7 here try catch is introducted to handle the error
+ try {
+     //every thing every promices as well as returned value is declear here
+ } catch (error) {
+    //we can console the error here by
+    console.log(error); 
+ }
+ */
+    </script>
+  </body>
+</html>

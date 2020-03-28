@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function getdata(){
+fetch('https://reqres.in/api/users?page=2')
+
+.then(val=>{
+//console.log(val)
+return val.json();
+
+})
+.then(data=>{
+    console.log(data)
+    var redata = data.data;
+    console.log(redata)
+    console.log(redata[0])
+    console.log(redata[1]) 
+})
+.catch(err=>{
+    console.log("something   dj wrong", err);
+})
+}
+
+getdata();
+
+
+</script>
+</html>
