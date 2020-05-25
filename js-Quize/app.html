@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>PLease open console</div>
+  </body>
+  <script>
+    (function () {
+      function Question(question, answer, correct) {
+        this.question = question;
+        this.answer = answer;
+        this.correct = correct;
+      }
+
+      Question.prototype.displayquestion = function () {
+        console.log(this.question);
+        for (var i = 0; i < this.answer.length; i++) {
+          console.log(i, this.answer[i]);
+        }
+      };
+
+      Question.prototype.checkAnswer = function (yourans , callback) {
+          var sc;
+        if (yourans === this.correct) {
+          console.log("correct Answer");
+         sc = callback(true)
+           
+        } else {
+          console.log("Wrong Answer , TryAgain");
+         sc = callback(false)
+        }
+        this.showScore(sc)
+      };
+
+      Question.prototype.showScore = function(src){
+      console.log('-----------------------------------------------------------')
+      console.log('YOUR score is ' + src)
+      console.log('-----------------------------------------------------------')
+      }
+
+      var q1 = new Question(
+        "What is my Name ?",
+        ["Nabin", "salan", "bibhu", "bishal"],
+        0
+      );
+      var q2 = new Question("How old i am ?", [11, 10, 20, 21], 3);
+
+      var q3 = new Question(
+        "Where is my home ?",
+        ["bkt", "Dang", "Rampur", "Chitwan"],
+        1
+      );
+
+      const arr = [q1, q2, q3];
+
+      function score() {
+        var scr = 0;
+        return function(correct){
+          if (correct) {
+            scr++;
+          }
+          return scr;
+        }
+      }
+
+      var addsrc = score();
+  
+
+      nextQuestion();
+
+      function nextQuestion() {
+        const ran = Math.floor(Math.random() * arr.length);
+        arr[ran].displayquestion();
+        var yourans = prompt("Enter Your Answer");
+        if (yourans !== "exit") {
+          arr[ran].checkAnswer(parseInt(yourans) , addsrc);
+          nextQuestion();
+        }
+      }
+    })();
+  </script>
+</html>
