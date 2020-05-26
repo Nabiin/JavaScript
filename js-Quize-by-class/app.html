@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    class bincls {
+      constructor(question, answer, correct) {
+        this.question = question;
+        this.answer = answer;
+        this.correct = correct;
+      }
+      showQus() {
+        console.log(this.question);
+        this.showAns();
+      }
+      showAns() {
+        for (let i = 0; i < this.answer.length; i++) {
+          console.log(i, this.answer[i]);
+        }
+      }
+      checkAns(userAns, src) {
+        if (this.correct === userAns) {
+          console.log("Bingo !!");
+          this.showScore(src(true));
+        } else {
+          console.log("Please Try again");
+          this.showScore(src(false));
+        }
+      }
+      showScore(src) {
+        console.log("--------------------------------------------------------");
+        console.log("Your Score is ", src);
+        console.log("--------------------------------------------------------");
+      }
+    }
+
+    const q1 = new bincls("What is my name", ["Nabin", "Salan", "bimal"], 0);
+    const q2 = new bincls(`What's my age `, ["19", "20", "21"], 2);
+    const q3 = new bincls("Where is my address", ["rukum", "dang", "rolpa"], 1);
+
+    //
+    function score() {
+      let a = 0;
+      return function (condi) {
+        if (condi) {
+          a++;
+        }
+        return a;
+      };
+    }
+
+    let src = score();
+
+    const ques = [q1, q2, q3];
+
+    function recallQues() {
+      const random = Math.floor(Math.random() * ques.length);
+      ques[random].showQus();
+      const yourAns = prompt("Type your answer");
+      if (yourAns !== "exit") {
+        ques[random].checkAns(parseInt(yourAns), src);
+        recallQues();
+      }
+    }
+    recallQues();
+  </script>
+</html>
